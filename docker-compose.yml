@@ -1,0 +1,36 @@
+services:
+  nginx:
+    container_name: nginx
+    build: ./docker/nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - localbridge
+  php:
+    container_name: php
+    build: ./docker/php
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - localbridge
+
+  flagd:
+    image: ghcr.io/open-feature/flagd:latest
+    command: start --uri file:/etc/flagd/flags.flagd.json
+    ports:
+      - "8013:8013"
+    volumes:
+      - ./:/etc/flagd/
+    networks:
+      - localbridge
+    restart: always
+
+networks:
+  localbridge:
+    driver: bridge

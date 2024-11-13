@@ -1,0 +1,7 @@
+{
+    "require": {
+        "open-feature/sdk": "^2.0",
+        "open-feature/flagd-provider": "^1.0",
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}

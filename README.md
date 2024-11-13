@@ -1,2 +1,2 @@
 # php-openfeature
-play open feature
+openfeature-php
